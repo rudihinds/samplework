@@ -1,0 +1,38 @@
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  gender: String
+  partner_gender: String
+  birthdate: String
+  partner_birthdate: String
+  career_begin_age: Int
+  partner_career_begin_age: Int
+  has_partner: Boolean
+  partner_name: String
+  default_plan_id: Int
+  default_plan: Plan
+  plans(orderBy: [OrderBy]): [Plan]
+}
+input UserInput {
+  name: String
+  gender: String
+  partner_gender: String
+  birthdate: String
+  partner_birthdate: String
+  career_begin_age: Int
+  partner_career_begin_age: Int
+  is_primary_care_giver: Boolean
+  has_partner: Boolean
+  family_plans: String
+  partner_name: String
+  default_plan_id: Int
+}
+
+type Query {
+  me: User
+}
+
+type Mutation {
+  updateCurrentUser(input: UserInput): User
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>Hey Mirza</title>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  {{ cspMeta() }}
+  @if(env('NODE_ENV') !== 'production' && !!env('SKIP_COOKIES_DISCLAIMER'))
+  <meta name="mirza_skip_cookie_disclaimer"/>
+  @endif
+  @if(!!env('GOOGLE_ANALYTICS'))
+  <meta name="mirza_google_analytics_id" content="{{env('GOOGLE_ANALYTICS') }}"/>
+  @endif
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=tihgtNnryXsXoPw82uEWag&gtm_preview=env-1&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TFH8X6N');</script>
+  <!-- End Google Tag Manager -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFH8X6N&gtm_auth=tihgtNnryXsXoPw82uEWag&gtm_preview=env-1&gtm_cookies_win=x"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <span id="config" data-user="{{ to_JSON(auth.user) }}"></span>
+  <div id="root" class="flex"></div>
+</body>
+</html>

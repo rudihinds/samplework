@@ -1,0 +1,37 @@
+# Node modules
+node_modules
+
+# Adonis directory for storing tmp files
+tmp
+
+# Environment variables, never commit this file
+.env
+
+# The development sqlite file
+database/*.sqlite
+
+# VSCode & Webstorm history directories
+.history
+.idea
+
+public/packs
+public/fonts
+public/hot
+public/mix-manifest.json
+
+# Others
+.log
+
+database/schema.sql
+# Elastic Beanstalk Files
+# .elasticbeanstalk/*
+# !.elasticbeanstalk/*.cfg.yml
+# !.elasticbeanstalk/*.global.yml
+.elasticbeanstalk/app_versions
+
+.DS_Store
+
+# webpack auto generated files
+resources/views/v2.edge
+public/v1
+public/v2

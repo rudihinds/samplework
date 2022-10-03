@@ -1,0 +1,8 @@
+type ChildcareResponse {
+  weekly_nanny_rate: Int
+  weekly_nanny_share_rate: Int
+  weekly_daycare_rate: Int
+}
+type Query {
+  childcareAverageCosts(zip_code: Int!, num_infants: Int!): ChildcareResponse
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@reuseable/*": ["components/reuseable/*"],
+      "@dashboard/*": ["components/dashboard/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"],
+      "@layouts/*": ["layouts/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"],
+      "@routing/*": ["routing/*"],
+      "@config/*": ["config/*"],
+      "@plan-creator/*": ["components/plan-creator/*"],
+      "@graphql/*": ["graphql/*"]
+    }
+  }
+}

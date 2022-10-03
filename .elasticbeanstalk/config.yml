@@ -1,0 +1,19 @@
+branch-defaults:
+  main:
+    environment: development
+environment-defaults:
+  development:
+    branch: null
+    repository: null
+global:
+  application_name: MirzaWebApp
+  default_ec2_keyname: mirza-dev
+  default_platform: Node.js 12 running on 64bit Amazon Linux 2
+  default_region: us-east-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: git
+  workspace_type: Application

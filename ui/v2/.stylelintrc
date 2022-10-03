@@ -1,0 +1,8 @@
+{
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-styled-components"
+  ],
+  "rules": { "value-keyword-case": null, "value-no-vendor-prefix": null, "property-no-vendor-prefix": null, "declaration-colon-newline-after": null }
+}

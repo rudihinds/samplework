@@ -1,0 +1,113 @@
+input PlanInput {
+  self_leave_items: [LeaveItemInput]
+  partner_leave_items: [LeaveItemInput]
+  self_return_items: [ReturnItemInput]
+  partner_return_items: [ReturnItemInput]
+  childcare_items: [ChildcareItemInput]
+  title: String
+  country_id: Int
+  zip_code: String
+  self_annual_income: Int
+  self_hours_per_week: Int
+  self_industry_id: Int
+  childbirth_year: Int
+  partner_annual_income: Int
+  partner_hours_per_week: Int
+  partner_industry_id: Int
+  expenses_mortgage_rent: Int
+  expenses_healthcare: Int
+  expenses_student_loan: Int
+  expenses_other: Int
+  childcare_early_years_essentials: Int
+  fertility_type: String
+  alternative_family_type: String
+  view_type: String
+  view_years: String
+}
+input LeaveItemInput {
+  id: Int
+  num_weeks: Int
+  salary_fraction: Float
+  is_partner: Boolean
+}
+input ReturnItemInput {
+  id: Int
+  num_hours: Int
+  num_weeks: Int
+  is_partner: Boolean
+}
+input ChildcareItemInput {
+  id: Int
+  childcare_type: String
+  cost_per_month: Int
+  days_per_week: Int
+}
+type Plan {
+  id: Int!
+  user: User!
+  self_leave_items: [LeaveItem]
+  partner_leave_items: [LeaveItem]
+  self_return_items: [ReturnItem]
+  partner_return_items: [ReturnItem]
+  childcare_items: [ChildcareItem]
+  title: String
+  country_id: Int
+  zip_code: String
+  self_annual_income: Int
+  self_hours_per_week: Int
+  self_industry_id: Int
+  childbirth_year: Int
+  partner_annual_income: Int
+  partner_hours_per_week: Int
+  partner_industry_id: Int
+  expenses_mortgage_rent: Int
+  expenses_healthcare: Int
+  expenses_student_loan: Int
+  expenses_other: Int
+  childcare_early_years_essentials: Int
+  fertility_type: String
+  alternative_family_type: String
+  view_type: String
+  view_years: String
+  created_at: String
+  updated_at: String
+}
+type LeaveItem {
+  id: Int!
+  plan: Plan!
+  num_weeks: Int
+  salary_fraction: Float
+  is_partner: Boolean
+  created_at: String!
+  updated_at: String!
+}
+type ReturnItem {
+  id: Int!
+  plan: Plan!
+  num_hours: Int
+  num_weeks: Int
+  is_partner: Boolean
+  created_at: String!
+  updated_at: String!
+}
+type ChildcareItem {
+  id: Int!
+  plan: Plan!
+  childcare_type: String
+  cost_per_month: Int
+  days_per_week: Int
+  created_at: String!
+  updated_at: String!
+}
+
+type Query {
+  fetchPlan(id: Int!): Plan
+}
+
+type Mutation {
+  createPlan(input: PlanInput): Plan
+  updatePlan(id: Int!, input: PlanInput): Plan
+  deletePlan(id: Int!): Plan
+  clearPlan(id: Int!): Plan
+  duplicatePlan(id: Int!): Plan
+}

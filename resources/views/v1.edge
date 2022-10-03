@@ -1,0 +1,7 @@
+@layout('layouts/main')
+
+@section('content')
+<span id="config" data-user="{{ to_JSON(auth.user) }}"></span>
+<div id="root" class="flex"></div>
+{{ script(mix('v1/js/application.js')) }}
+@endsection

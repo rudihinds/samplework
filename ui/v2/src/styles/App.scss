@@ -1,0 +1,16 @@
+@charset 'utf-8';
+
+@import 'fonts';
+
+.container {
+  max-width: max-content;
+  width: 100%;
+  margin: auto;
+}
+
+@import 'hamburger';
+@import 'nprogress';
+@import '~swiper/swiper.scss';
+@import '~swiper/components/pagination/pagination.scss';
+@import '~react-datepicker/dist/react-datepicker.css';
+@import '~react-responsive-modal/styles.css';

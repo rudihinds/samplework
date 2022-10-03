@@ -1,0 +1,12 @@
+scalar JSON
+scalar JSONObject
+
+enum Direction {
+  ASC
+  DESC
+}
+
+input OrderBy {
+  column: String!
+  order: Direction!
+}

@@ -1,0 +1,32 @@
+{
+  "n_weeks": "{{count}} week",
+  "n_weeks_plural": "{{count}} weeks",
+  "week": "week",
+  "week_plural": "weeks",
+  "hrs_p_week": "hr/week",
+  "hrs_p_week_plural": "hrs/week",
+  "n_hrs_p_week": "{{count}} hr/week",
+  "n_hrs_p_week_plural": "{{count}} hrs/week",
+  "n_fertility_treatment_cycles": "{{count}} cycle",
+  "n_fertility_treatment_cycles_plural": "{{count}} cycles",
+  "fertility_treatment": {
+    "off": "None",
+    "ivf": "IVF"
+  },
+  "child_care": {
+    "off": "None",
+    "nanny": "Nanny",
+    "daycare": "Daycare"
+  },
+  "expenses_labels": {
+    "ivf": "IVF",
+    "daycare": "Daycare",
+    "nanny": "Nanny"
+  },
+  "success": {
+    "saved": "Your information has been saved."
+  },
+  "errors": {
+    "generic": "An error occurred while processing your request, please try again."
+  }
+}

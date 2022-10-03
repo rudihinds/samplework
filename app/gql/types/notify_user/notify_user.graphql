@@ -1,0 +1,19 @@
+input NotifyUserInput {
+  notification_type: String!
+}
+
+type NotifyUser {
+  id: Int!
+  user_id: Int!
+  notification_type: String!
+  sent: Boolean
+  user: User!
+}
+
+type Query {
+  fetchNotifyUser(notification_type: String!): NotifyUser
+}
+
+type Mutation {
+  createNotifyUser(input: NotifyUserInput): NotifyUser
+}

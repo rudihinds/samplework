@@ -1,0 +1,144 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: lint test deploy
+
+on:
+  pull_request:
+    branches: [ dev ]
+  push:
+    branches: [ dev, beta ]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.21.0'
+
+      - name: Install Node.js dependencies in v2
+        run: yarn install
+        working-directory: ui/v2
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          prettier: true
+          prettier_dir: ui/v2
+          prettier_args: '--write'
+          eslint: true
+          eslint_dir: ui/v2
+          eslint_extensions: 'js,jsx'
+          eslint_args: '--fix'
+          stylelint: true
+          stylelint_dir: ui/v2/src
+          stylelint_extensions: 'js,jsx'
+          stylelint_args: '--syntax scss'
+          continue_on_error: false
+
+  deploy:
+
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    # Sets deployment vars depending on branch or PR
+    # If dev branch
+    - name: Set env vars (dev)
+      if: github.ref == 'refs/heads/dev'
+      run: |
+        echo "EB_ENVIRONMENT=development" >> $GITHUB_ENV
+        echo "EB_DOMAIN=dev.heymirza.dev" >> $GITHUB_ENV
+    - name: Set env vars (beta)
+      if: github.ref == 'refs/heads/beta'
+      run: |
+        echo "EB_ENVIRONMENT=beta" >> $GITHUB_ENV
+        echo "EB_DOMAIN=beta.heymirza.dev" >> $GITHUB_ENV
+    # If pull request
+    - name: Set env vars (preview)
+      if: github.base_ref == 'dev'
+      run: |
+        echo "EB_ENVIRONMENT=preview" >> $GITHUB_ENV
+        echo "EB_DOMAIN=preview.heymirza.dev" >> $GITHUB_ENV
+
+    - uses: actions/checkout@v2
+
+    # Prevents running multiple deploys concurrently
+    - name: Turnstyle
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python 3.6 (needed for eb cli)
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.6"
+    - name: Configure AWS credentials 
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+    
+    - name: Cache awsebcli
+      id: cache-awsebcli
+      uses: actions/cache@v2
+      with:
+        path: |
+          ${{ env.pythonLocation }}/lib/python3.6/site-packages/*
+        key: pip-awsebcli-2
+
+    - name: Cache eb binary
+      id: cache-eb-binary
+      uses: actions/cache@v2
+      with:
+        path: /opt/hostedtoolcache/Python/3.6.13/x64/bin/eb
+        key: pip-eb-binary
+
+    - name: Install awsebcli
+      if: steps.cache-awsebcli.outputs.cache-hit != 'true' || steps.cache-eb-binary.outputs.cache-hit != 'true'
+      run: |
+        pip install awsebcli --upgrade
+        eb --version
+        which eb
+
+    # - run: eb --version
+
+    # Updates GitHub deployment tracking
+    - uses: chrnorm/deployment-action@releases/v1
+      name: Create GitHub deployment
+      id: deployment
+      with:
+        token: "${{ github.token }}"
+        target_url: "https://${{ env.EB_DOMAIN }}"
+        environment: ${{ env.EB_ENVIRONMENT }}
+        ref: ${{ github.sha }}
+
+    # EB deployment
+    - run: eb deploy ${{ env.EB_ENVIRONMENT }}
+
+    - name: Update deployment status (success)
+      if: success()
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: "${{ github.token }}"
+        # target_url: "https://preview.heymirza.dev"
+        state: "success"
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
+    - name: Update deployment status (failure)
+      if: failure()
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: "${{ github.token }}"
+        # target_url: "https://preview.heymirza.dev"
+        state: "failure"
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}

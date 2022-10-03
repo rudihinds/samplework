@@ -1,0 +1,39 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "useBuiltIns": "usage",
+            "corejs": 3
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "babel-plugin-macros",
+        "@babel/plugin-transform-react-jsx",
+        "react-refresh/babel",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "useBuiltIns": "usage",
+            "corejs": 3
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "babel-plugin-macros",
+        "@babel/plugin-transform-react-jsx",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    }
+  }
+}

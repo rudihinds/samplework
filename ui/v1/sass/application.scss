@@ -1,0 +1,284 @@
+/* stylelint-disable */
+@import '~react-vis/dist/style';
+@import 'misc';
+@import '../../v2/src/styles/nprogress.scss';
+
+html,
+body {
+  // background: $cream;
+  font: 16px/1.1 $font-base;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  // background: url('/img/bg.png'), linear-gradient(175.78deg, #f2ebe6 0%, #ede2de 100%);
+  // background-repeat: no-repeat, repeat;
+  // background-position: top center, top left;
+  // background-size: (920px / 2), 100%;
+}
+
+* {
+  max-width: 100%;
+}
+
+// Sticky footer
+html,
+body,
+.flex {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#mirza-main {
+  flex: 1;
+}
+// /Sticky footer
+
+.wrap {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  &--min {
+    max-width: 330px;
+  }
+  @media (screen and max-width: 960px + 20px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.wrap-graph {
+  position: sticky;
+  top: 150px;
+}
+
+.wraptop {
+  padding-top: 60px;
+}
+.wrapcontent {
+  width: 90%;
+  margin: 0 auto;
+}
+
+footer#mirza-footer {
+  margin-top: 30px;
+  @include mq-mobile {
+    margin-bottom: 60px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-titles;
+  font-weight: 900;
+  color: $firefly;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.6rem;
+}
+h4 {
+  font-size: 1.2rem;
+}
+h5 {
+  font-size: 1.1rem;
+}
+.notitle {
+  font-family: $font-base;
+  margin: 0;
+}
+.rgt {
+  text-align: right;
+}
+.lft {
+  text-align: left;
+}
+.ctr {
+  text-align: center;
+}
+a {
+  color: $darkgreen;
+  &:hover {
+    color: $darkgreen-dark;
+  }
+}
+
+i.svg {
+  display: inline-block;
+  &.fill-svg {
+    svg {
+      fill: currentColor;
+    }
+  }
+}
+
+.p {
+  margin: 10px 0;
+}
+.inputtext,
+textarea,
+.button {
+  font-family: inherit;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 5px 6px;
+  border: 1px solid $purple-dark;
+  color: $purple-dark;
+  &.min {
+    width: 110px;
+  }
+  &.full {
+    width: 100%;
+  }
+  &.disabled {
+    opacity: 0.5;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+input {
+  &.full {
+    width: 100%;
+  }
+}
+.button {
+  background: $purple-dark;
+  color: $cream;
+  border: 0;
+  min-width: 110px;
+}
+.form-error {
+  color: $purple-dark;
+  &--label {
+    font-size: 0.8rem;
+    display: inline-block;
+    padding: 3px 5px;
+    background: $purple-dark;
+    color: $cream;
+  }
+}
+
+.pillbutton {
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 5px 10px;
+  background: $purple-dark;
+  color: $cream;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding-right: 11px;
+  padding-left: 11px;
+  white-space: nowrap;
+  &.secondary {
+    background: $purple-light;
+  }
+  &.clickable {
+    cursor: pointer;
+  }
+  &--off {
+    background: transparent;
+    color: $purple-light;
+    border: 1px solid $purple-light;
+  }
+}
+
+.section-title {
+}
+.section-intro {
+  margin-top: 60px;
+}
+
+.bgwhite {
+  background: $white;
+}
+.bg-section-intro {
+  background: url('/svg/intro-bg.svg') no-repeat top center;
+  background-size: calc(100% - 10px);
+  overflow: hidden;
+  animation: anim-section-intro 0.25s;
+}
+@keyframes anim-section-intro {
+  from {
+    background-position: 50% -100vh;
+  }
+  to {
+    background-position: 50% 0%;
+  }
+}
+
+.rangeval {
+  display: block;
+  text-align: center;
+  &-num {
+    font-size: 1.2rem;
+    display: block;
+  }
+}
+.panel-btma {
+  &--main {
+    flex: 1;
+  }
+  &--cta {
+    text-align: center;
+    flex: 0 1;
+  }
+}
+
+.inline-grid {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  align-items: center;
+  &--row {
+    grid-auto-flow: row;
+  }
+}
+
+.mq-tablet-center {
+  @include mq-tablet {
+    max-width: 420px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.MuiTouchRipple-root * {
+  max-width: unset;
+}
+
+.slide-enter,
+.slide-exit {
+  transition: opacity 0.1s, transform 0.15s;
+}
+.slide-enter {
+  transform: translateY(10px);
+  opacity: 0;
+  height: 0;
+}
+.slide-enter.slide-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+.slide-exit {
+}
+.slide-exit-active {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+::selection {
+  background: $darkgreen;
+  color: $white;
+}

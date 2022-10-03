@@ -1,0 +1,3 @@
+api: docker-compose up
+ui_v1: cd ui/v1 && yarn run watch
+ui_v2: cd ui/v2 && yarn dev
